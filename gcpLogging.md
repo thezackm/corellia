@@ -1,5 +1,15 @@
 # Stackdriver Logs to New Relic Logging via Logstash
 
+- Overview
+  * [Reference Docs](#reference-docs)
+  * [Enable GCP APIs](#enable-gcp-apis)
+  * [Create GCP Service Account](#create-gcp-service-account)
+  * [Create GCP Pub/Sub Topic and Subscription](#create-gcp-pub-sub-topic-and-subscription)
+  * [Create Stackdriver Logging sink](#create-stackdriver-logging-sink)
+  * [Create Logstash VM in GCE](#create-logstash-vm-in-gce)
+  * [Install and Configure Logstash](#install-and-configure-logstash)
+  * [Test Connectivity](#test-connectivity)
+
 ## Reference Docs
 [Logstash Plugin](https://github.com/logstash-plugins/logstash-input-google_pubsub)
 
@@ -9,21 +19,16 @@
 
 [New Relic Logstash](https://docs.newrelic.com/docs/logs/enable-logs/enable-logs/logstash-plugin-logs)
 
-## Overview
-1) Enable GCP APIs
-2) Create a GCP Service Account
-3) Create a GCP Pub/Sub Topic and Subscription
-4) Create a Stackdriver Logging sink
-5) Create Logstash VM
-6) Install and Configure Logstash
+[Stackdriver Monitored Resource Types](https://cloud.google.com/monitoring/api/resources)
 
 ## Enable GCP APIs
 * Compute Engine
 * Cloud Pub/Sub
 * IAM
 * Stackdriver
+* Cloud Functions (Only needed for testing)
 
-`gcloud services enable compute.googleapis.com pubsub.googleapis.com iam.googleapis.com stackdriver.googleapis.com`
+`gcloud services enable compute.googleapis.com pubsub.googleapis.com iam.googleapis.com stackdriver.googleapis.com cloudfunctions.googleapis.com`
 
 ## Create GCP Service Account
 Create a Service Account to use with least-privileged access for running your VM
@@ -146,10 +151,6 @@ output
 </p>
 </details> 
 
-Start Logstash: `sudo service logstash start`
-
-Tail startup log for errors: `sudo tail -f /var/log/syslog`
-
 _NOTE: In production, you'll want to remove the Heartbeat from the config file to save costs and reduce noise_
 
 <details>
@@ -178,6 +179,38 @@ output
       license_key => "<licenseKey>"
     }
 }
+```
+
+</p>
+</details> 
+
+Start Logstash: `sudo service logstash start`
+
+Tail startup log for errors: `sudo tail -f /var/log/syslog`
+
+## Test Connectivity
+
+If necessary, you can [Build a small Cloud Function](https://cloud.google.com/functions/docs/quickstart-console) to test the Pub/Sub settings.
+
+<details>
+<summary>Cloud Function source code: helloWorld</summary>
+<p>
+
+```javascript
+
+/**
+ * Responds to any HTTP request.
+ *
+ * @param {!express:Request} req HTTP request context.
+ * @param {!express:Response} res HTTP response context.
+ */
+exports.helloWorld = (req, res) => {
+  let message = req.query.message || req.body.message || 'Hello World!';
+  console.log('I am a log entry!');
+  console.error('I am an error!');  
+  res.status(200).send(message);
+};
+
 ```
 
 </p>
