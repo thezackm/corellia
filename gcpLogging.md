@@ -1,4 +1,4 @@
-# Stackdriver Logs to New Relic Logging via Logstash
+# Stackdriver Logs to New Relic Logs via Logstash
 
 - Overview
   * [Reference Docs](#reference-docs)
