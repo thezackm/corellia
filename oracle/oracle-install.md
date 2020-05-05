@@ -1,9 +1,5 @@
 # Overview
-
-```shell
-cat /etc/os-release  | grep "PRETTY"
-PRETTY_NAME="CentOS Linux 7 (Core)"
-```
+This is a set of notes gathered during the installation of Oracle Express v18c on May 5, 2020.
 
 ## Download Oracle DB Express v18c
 
@@ -18,9 +14,10 @@ PRETTY_NAME="CentOS Linux 7 (Core)"
 ## Install Dependencies
 
 Install JDK 11
+
 `sudo yum install java-11-openjdk-devel`
 
-## Install Oracle Instant Client (Basic)
+## Install Oracle Instant Client (SQLPlus)
 ### Update yum repository
 
 `sudo wget "http://yum.oracle.com/public-yum-ol7.repo" -O /etc/yum.repos.d/public-yum-ol7.repo`
@@ -31,13 +28,19 @@ wget "http://yum.oracle.com/RPM-GPG-KEY-oracle-ol7"
 sudo rpm --import RPM-GPG-KEY-oracle-ol7
 ```
 
-### Install `yum-utils`
+### Install yum-utils
 
 `sudo yum install yum-utils`
 
 ### Enable Oracle InstantClient Repo
 
 `sudo yum-config-manager --enable ol7_oracle_instantclient`
+
+### List available Instance Client packages
+
+`sudo yum list oracle-instantclient18.3*`
+
+`<image>`
 
 ### Install oracle-instantclient18.3-sqlplus.x86_64
 
@@ -51,9 +54,13 @@ This will list your uninstalled dependencies that you can then install with:
 
  `sudo yum install -y dependency1 dependency2 etc`
 
+ `<image>`
+
 ## Install Oracle Express package
 
 `sudo rpm -ivh oracle-database-xe-18c-1.0-1.x86_64.rpm`
+
+`<image>`
 
 ## Configure the Initial DB Settings
 
@@ -181,3 +188,4 @@ Query the Oracle DB Version to validate everything is working
 
 `select * from V$VERSION;`
 
+`<image>`
