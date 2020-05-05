@@ -40,7 +40,7 @@ sudo rpm --import RPM-GPG-KEY-oracle-ol7
 
 `sudo yum list oracle-instantclient18.3*`
 
-`<image>`
+![Instant Client Versions](/oracle/screenshots/oracle-instantclient-versions.png)
 
 ### Install oracle-instantclient18.3-sqlplus.x86_64
 
@@ -54,13 +54,13 @@ This will list your uninstalled dependencies that you can then install with:
 
  `sudo yum install -y dependency1 dependency2 etc`
 
- `<image>`
+![Install PreInstall Package](/oracle/screenshots/oracle-preinstall-dependencies.png)
 
 ## Install Oracle Express package
 
 `sudo rpm -ivh oracle-database-xe-18c-1.0-1.x86_64.rpm`
 
-`<image>`
+![Install Main Package](/oracle/screenshots/oracle-installed.png)
 
 ## Configure the Initial DB Settings
 
@@ -188,4 +188,4 @@ Query the Oracle DB Version to validate everything is working
 
 `select * from V$VERSION;`
 
-`<image>`
+![SQL-Plus Validation](/oracle/screenshots/sqlplus-connect.png)
