@@ -106,7 +106,7 @@ kubectl cp $(kubectl get pods -l k8s-app=etcd-manager-main -n kube-system -o jso
 
 `curl -O https://download.newrelic.com/infrastructure_agent/integrations/kubernetes/nri-kube-events-latest.yaml`
 
-```yaml
+```
 clusterName: "YOUR_CLUSTER_NAME"
 [...]
 	- name: "NRIA_LICENSE_KEY"
@@ -172,12 +172,3 @@ metadata: ...
 ```
 
 Update to: `apiVersion: apps/v1`
-
-
-app.kubernetes.io/name=newrelic-logging,
-controller-revision-hash=869444d57,
-k8s-app=newrelic-logging,
-kubernetes.io/cluster-service=true,
-name=newrelic-logging,
-pod-template-generation=1,
-version=v1
