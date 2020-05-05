@@ -1,6 +1,6 @@
 # Overview
 
-This document goes through the workflow of installing the Human Resources (HR) sample schema provided by Oracle.
+This document goes through the workflow of installing the sample schemas for v18c provided by Oracle.
 
 [Sample Schema Repository](https://github.com/oracle/db-sample-schemas)
 
@@ -15,7 +15,7 @@ This document goes through the workflow of installing the Human Resources (HR) s
   tar -xf v18c.tar.gz
   ```
 
-2. Update installation scripts with current working directory
+2. `CD` into `v18c` and update installation scripts with current working directory
 
     `sudo perl -p -i.bak -e 's#__SUB__CWD__#'$(pwd)'#g' *.sql */*.sql */*.dat`
 
