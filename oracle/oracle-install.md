@@ -169,7 +169,7 @@ Reboot to reload Environment
 
 Start the Oracle service
 
-`udo systemctl start oracle-xe-18c`
+`sudo systemctl start oracle-xe-18c`
 
 Setup Autostart
 
@@ -182,7 +182,7 @@ sudo systemctl enable oracle-xe-18c
 
 Login as the `SYSTEM` user, using the password you set in the initial config
 
-`sqplus SYSTEM`
+`sqlplus SYSTEM`
 
 Query the Oracle DB Version to validate everything is working
 
