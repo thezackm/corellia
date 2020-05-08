@@ -122,3 +122,9 @@ This document goes through the workflow of installing the sample schemas for v18
         )
       )
     ```
+
+    Now we need to open up permissions for the non-root user(s) to access these files
+    
+    ***DO NOT DO THIS ON A PROD SYSTEM***
+    
+    `chmod 777 listeners.ora tnsnames.ora`
